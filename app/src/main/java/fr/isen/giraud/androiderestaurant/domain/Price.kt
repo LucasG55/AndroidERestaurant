@@ -1,11 +1,11 @@
 package fr.isen.giraud.androiderestaurant.domain
 
-data class ingredient (
+data class Price (
     val id : String,
-    val id_shop : String,
-    val name_fr : String,
-    val name_en : String,
+    val id_pizza : String,
+    val id_size : String,
+    val price : String,
     val create_date : String,
     val update_date : String,
-    val id_pizza : String
+    val size : String
         )

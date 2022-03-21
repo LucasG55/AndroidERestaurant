@@ -1,6 +1,6 @@
 package fr.isen.giraud.androiderestaurant.domain
 
-data class item (
+data class Item (
     val id : String,
     val name_fr : String,
     val name_en : String,
@@ -8,6 +8,6 @@ data class item (
     val categ_name_fr : String,
     val categ_name_en : String,
     val images : Array<String>,
-    val ingredients : Array<ingredient>,
-    val prices : Array<price>
+    val ingredients : Array<Ingredient>,
+    val prices : Array<Price>
     )

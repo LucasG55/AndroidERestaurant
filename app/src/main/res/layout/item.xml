@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/image"
         android:layout_width="139dp"
         android:layout_height="146dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,23 +53,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Ingredient" />
 
-    <TextView
-        android:id="@+id/Ingredient2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:text="Boulettes"
-        app:layout_constraintStart_toEndOf="@+id/Ingredient1"
-        app:layout_constraintTop_toBottomOf="@+id/Ingredient" />
-
-    <TextView
-        android:id="@+id/Ingredient3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:text="Tomates"
-        app:layout_constraintStart_toEndOf="@+id/Ingredient2"
-        app:layout_constraintTop_toBottomOf="@+id/Ingredient" />
 </androidx.constraintlayout.widget.ConstraintLayout>
