@@ -2,8 +2,10 @@ package fr.isen.giraud.androiderestaurant
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.isen.giraud.androiderestaurant.databinding.ItemCartBinding
 import fr.isen.giraud.androiderestaurant.domain.CartLine
 
@@ -16,6 +18,7 @@ internal class CartAdapter(private var itemsList: MutableList<CartLine>, private
         val quantity = binding.quantite
         val totalItemPrice = binding.itemTotalPrice
         val btnDelete = binding.delete
+        var img : ImageView = binding.image
 
     }
 
@@ -32,6 +35,16 @@ internal class CartAdapter(private var itemsList: MutableList<CartLine>, private
         holder.totalItemPrice.text = (item.Item.prices[0].price.toFloat()*item.quantite).toString()+" €"
         holder.btnDelete.setOnClickListener {
             onClickListener.onClick(item)
+        }
+        if (item.Item.images[0].isEmpty()) {
+            holder.img.setImageResource(R.drawable.foodlogo)
+        } else{
+            if(item.Item.name_fr.equals("Burger maison")){
+                Picasso.get().load(item.Item.images[1]).into(holder.img)
+            }
+            else{
+                Picasso.get().load(item.Item.images[0]).into(holder.img)
+            }
         }
     }
 

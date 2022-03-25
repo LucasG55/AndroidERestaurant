@@ -7,7 +7,7 @@
     tools:context=".CartActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerPanier"
+        android:id="@+id/recyclerCart"
         android:layout_width="414dp"
         android:layout_height="559dp"
         app:layout_constraintStart_toStartOf="parent"

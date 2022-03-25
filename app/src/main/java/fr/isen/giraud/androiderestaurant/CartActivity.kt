@@ -1,21 +1,22 @@
 package fr.isen.giraud.androiderestaurant
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import fr.isen.giraud.androiderestaurant.databinding.ActivityPanierBinding
-import fr.isen.giraud.androiderestaurant.domain.CartLine
+import fr.isen.giraud.androiderestaurant.databinding.ActivityCartBinding
 import fr.isen.giraud.androiderestaurant.domain.Cart
+import fr.isen.giraud.androiderestaurant.domain.CartLine
 import java.io.File
+
 
 class CartActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityPanierBinding
+    private lateinit var binding : ActivityCartBinding
     private val itemsList = ArrayList<CartLine>()
     private lateinit var cartAdapter: CartAdapter
     private lateinit var cart: Cart
@@ -23,7 +24,7 @@ class CartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPanierBinding.inflate(layoutInflater)
+        binding = ActivityCartBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -32,25 +33,39 @@ class CartActivity : AppCompatActivity() {
         title = "Votre panier"
 
         //setup du recycler view
-        val recyclerPanier: RecyclerView = binding.recyclerPanier
+        val recyclerCart: RecyclerView = binding.recyclerCart
         cartAdapter = CartAdapter(itemsList,CartAdapter.OnClickListener { item ->
             onListCartClickDelete(item)
         })
         val layoutManager = LinearLayoutManager(applicationContext)
-        recyclerPanier.layoutManager = layoutManager
-        recyclerPanier.adapter = cartAdapter
+        recyclerCart.layoutManager = layoutManager
+        recyclerCart.adapter = cartAdapter
         cart.lignes.forEach { ligne: CartLine-> itemsList.add(ligne) }
         cartAdapter.notifyDataSetChanged()
 
         //prix
         updateTotalPrice()
+
+        val buyButton = binding.buttonTotalPrice
+
+        buyButton.setOnClickListener {
+            // make a toast on button click event
+            Toast.makeText(this, "You buy it", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 
     private fun updateTotalPrice(){
         var totalPrice = 0.0F
         this.cart.lignes.forEach { ligne:CartLine -> totalPrice += ligne.Item.prices[0].price.toFloat() * ligne.quantite }
-        binding.buttonTotalPrice.text = "Payez " + totalPrice.toString() + " €"
+
+        if(totalPrice == 0.0F){
+            binding.buttonTotalPrice.text = "Vous n'avez rien dans votre panier"
+        }
+        else{
+            binding.buttonTotalPrice.text = "Payez " + totalPrice.toString() + " €"
+        }
     }
 
     private fun onListCartClickDelete(item: CartLine) {

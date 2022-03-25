@@ -14,7 +14,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setTitle("AndroidERestaurant")
+
+        title = "AndroidERestaurant"
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
