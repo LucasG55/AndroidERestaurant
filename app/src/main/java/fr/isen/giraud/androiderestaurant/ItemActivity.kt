@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import fr.isen.giraud.androiderestaurant.databinding.ActivityItemBinding
 import fr.isen.giraud.androiderestaurant.domain.Item
-import fr.isen.giraud.androiderestaurant.domain.LignePanier
-import fr.isen.giraud.androiderestaurant.domain.Panier
+import fr.isen.giraud.androiderestaurant.domain.CartLine
+import fr.isen.giraud.androiderestaurant.domain.Cart
 import pl.polak.clicknumberpicker.ClickNumberPickerListener
 import java.io.File
 
@@ -21,7 +21,7 @@ class ItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityItemBinding
     private lateinit var mViewPagerAdapter: PagerAdapter
     private lateinit var viewPager: ViewPager
-    private lateinit var panier:Panier
+    private lateinit var cart:Cart
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class ItemActivity : AppCompatActivity() {
         binding = ActivityItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        this.panier=lecturePanier()
+        this.cart = CartRead()
 
         val item: Item = Gson().fromJson(intent.getStringExtra("Item"), Item::class.java)
 
@@ -64,7 +64,7 @@ class ItemActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
 
         //initialisation badge sur le panier
-        binding.cartNumber.text=initPanierBadge()
+        binding.cartNumber.text = initNumCart()
 
 
         val picker = binding.pickNumber
@@ -78,20 +78,16 @@ class ItemActivity : AppCompatActivity() {
             // make a toast on button click event
             Toast.makeText(this, "Ajouté à votre panier", Toast.LENGTH_SHORT).show()
             //modification texte badge et ecriture dans le fichier panier
-            val commentaire:String=binding.commentaireInput.text.toString()
-            binding.cartNumber.text=ecriturePanier(binding.pickNumber.value.toInt(),item, commentaire)
+            binding.cartNumber.text = CartWrite(binding.pickNumber.value.toInt(),item)
         }
 
         var cartButton = binding.cart
         cartButton.setOnClickListener {
             // make a toast on button click event
             Toast.makeText(this, "Votre panier", Toast.LENGTH_SHORT).show()
-            this.panier=lecturePanier()
-            if(binding.commentaireInput.text.isNullOrBlank() || binding.commentaireInput.text.isNullOrEmpty()){
-                binding.commentaireInput.setText("")
-            }
-            Toast.makeText(this@ItemActivity, panier.lignes.size.toString(), Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,ActivityPanier::class.java)
+            this.cart = CartRead()
+
+            val intent = Intent(this,CartActivity::class.java)
             startActivity(intent)
         }
 
@@ -113,11 +109,11 @@ class ItemActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        this.panier=lecturePanier()
-        binding.cartNumber.text = panier.lignes.size.toString()
+        this.cart = CartRead()
+        binding.cartNumber.text = cart.lignes.size.toString()
     }
 
-    private fun initPanierBadge():String{
+    private fun initNumCart():String{
         //sauvegarde du panier en json dans les fichiers
         //lecture du fichier
         val filename1 = "panier.json"
@@ -126,28 +122,28 @@ class ItemActivity : AppCompatActivity() {
 
         return if(file.exists()){
             val contents = file.readText()
-            panier = Gson().fromJson(contents,Panier::class.java)
-            panier.lignes.size.toString()
+            cart = Gson().fromJson(contents,Cart::class.java)
+            cart.lignes.size.toString()
         } else{
             ""
         }
     }
 
-    private fun lecturePanier(): Panier {
+    private fun CartRead(): Cart {
         //lecture fichier panier
         val filename = "panier.json"
         val file = File(binding.root.context.filesDir, filename)
         return if(file.exists()){
             val contents = file.readText()
-            Gson().fromJson(contents, Panier::class.java)
+            Gson().fromJson(contents, Cart::class.java)
         }else{
-            Panier(ArrayList())
+            Cart(ArrayList())
         }
     }
 
-    private fun ecriturePanier(value: Int, item:Item,com:String): String {
+    private fun CartWrite(value: Int, item:Item): String {
         //sauvegarde du panier en json dans les fichiers
-        val lignePanier= LignePanier(value,item,com)
+        val lignePanier = CartLine(value,item)
 
         //ecriture nombre d'article dans panier
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
@@ -157,23 +153,23 @@ class ItemActivity : AppCompatActivity() {
         val filename1 = "panier.json"
         val file = File(binding.root.context.filesDir, filename1)
         //si le fichier existe on lit le panier directement dedans
-        panier = if(file.exists()){
+        cart = if(file.exists()){
             val contents = file.readText()
-            Gson().fromJson(contents,Panier::class.java)
+            Gson().fromJson(contents,Cart::class.java)
         }
         //si le fichier n'existe pas on cree un panier vide
         else{
-            Panier(ArrayList())
+            Cart(ArrayList())
         }
         //puis on ajoute notre element au panier et on ecrit le fichier
-        panier.lignes.add(lignePanier)
-        val panierJson = Gson().toJson(panier)
+        cart.lignes.add(lignePanier)
+        val panierJson = Gson().toJson(cart)
         Log.d("Panier",panierJson)
         val filename = "panier.json"
         this.binding.root.context.openFileOutput(filename, Context.MODE_PRIVATE).use {
             it.write(panierJson.toByteArray())
         }
-        return panier.lignes.size.toString()
+        return cart.lignes.size.toString()
     }
 
 }

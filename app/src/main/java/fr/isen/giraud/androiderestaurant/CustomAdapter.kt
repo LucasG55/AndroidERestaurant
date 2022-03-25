@@ -40,6 +40,9 @@ internal class CustomAdapter(private var itemsList: List<Item>, private val onCl
         if (item.images[0].isEmpty()) {
             holder.img.setImageResource(R.drawable.foodlogo)
         } else{
+            if (item.name_fr.equals("Burger maison")){
+                Picasso.get().load(item.images[1]).into(holder.img)
+            }
             Picasso.get().load(item.images[0]).into(holder.img)
         }
     }
