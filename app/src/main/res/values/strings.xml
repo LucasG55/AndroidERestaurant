@@ -4,5 +4,8 @@
     <string name="buttonEntrees">Entrées</string>
     <string name="buttonPlats">Plats</string>
     <string name="buttonDesserts">Desserts</string>
+    <string name="itemName">ItemName</string>
+    <string name="none" />
+    <string name="platPrice">10 €</string>
 
 </resources>

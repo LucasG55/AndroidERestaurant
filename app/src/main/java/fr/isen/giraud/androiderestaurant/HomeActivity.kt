@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import fr.isen.giraud.androiderestaurant.databinding.ActivityHomeBinding
 
@@ -20,9 +19,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var buttonEntrees = findViewById(R.id.buttonEntrees) as Button
-        var buttonPlats = findViewById(R.id.buttonPlats) as Button
-        var buttonDesserts = findViewById(R.id.buttonDesserts) as Button
+        var buttonEntrees = binding.buttonEntrees
+        var buttonPlats = binding.buttonPlats
+        var buttonDesserts = binding.buttonDesserts
 
         buttonEntrees.setOnClickListener {
             // make a toast on button click event
