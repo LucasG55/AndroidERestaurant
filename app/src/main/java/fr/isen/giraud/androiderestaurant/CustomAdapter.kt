@@ -8,16 +8,16 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import fr.isen.giraud.androiderestaurant.databinding.ItemBinding
+import fr.isen.giraud.androiderestaurant.databinding.ItemCategoryBinding
 import fr.isen.giraud.androiderestaurant.domain.Item
 
 internal class CustomAdapter(private var itemsList: List<Item>, private val onClickListener: OnClickListener) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
 
 
-    private lateinit var binding: ItemBinding
+    private lateinit var binding: ItemCategoryBinding
 
 
-    internal inner class MyViewHolder(binding: ItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    internal inner class MyViewHolder(binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         var itemName: TextView = binding.ItemName
         var prix: TextView = binding.ItemPrix
         var img : ImageView= binding.image
@@ -25,7 +25,7 @@ internal class CustomAdapter(private var itemsList: List<Item>, private val onCl
 
     @NonNull
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        binding = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MyViewHolder(binding)
     }
