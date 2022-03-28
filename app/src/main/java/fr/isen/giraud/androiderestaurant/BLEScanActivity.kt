@@ -10,16 +10,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.giraud.androiderestaurant.databinding.ActivityBlescanBinding
-import fr.isen.giraud.androiderestaurant.model.CartLine
 import fr.isen.giraud.androiderestaurant.view.BLEAdapter
-import fr.isen.giraud.androiderestaurant.view.CartAdapter
 
 
 class BLEScanActivity : AppCompatActivity() {
@@ -102,8 +99,7 @@ class BLEScanActivity : AppCompatActivity() {
 
     private val scanCallBack = object : ScanCallback(){
         override fun onScanResult(callBackType : Int, result:ScanResult){
-            itemsList.add(result)
-            bleAdapter.notifyDataSetChanged()
+            addToList(result)
         }
     }
 
@@ -134,6 +130,17 @@ class BLEScanActivity : AppCompatActivity() {
         ) {
             startActivityForResult(enableBtIntent, ALL_PERMISSIONS_REQUEST_CODE)
         }
+    }
+
+    private fun addToList(resultat:ScanResult){
+        val index:Int = itemsList.indexOfFirst{ it.device.address == resultat.device.address }
+        if(index == -1){
+            itemsList.add(resultat)
+        }else{
+            itemsList[index] = resultat
+        }
+        itemsList.sortBy { kotlin.math.abs(it.rssi) }
+        bleAdapter.notifyDataSetChanged()
     }
 
 }

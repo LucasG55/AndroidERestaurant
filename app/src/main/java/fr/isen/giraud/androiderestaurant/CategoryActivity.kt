@@ -63,7 +63,6 @@ class CategoryActivity : AppCompatActivity() {
         val intent = Intent(this, ItemActivity::class.java)
         intent.putExtra("Item", Gson().toJson(item))
         startActivity(intent)
-
     }
 
     override fun onDestroy() {
