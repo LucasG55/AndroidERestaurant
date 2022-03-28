@@ -44,7 +44,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </Toolbar>
 
     <androidx.viewpager.widget.ViewPager

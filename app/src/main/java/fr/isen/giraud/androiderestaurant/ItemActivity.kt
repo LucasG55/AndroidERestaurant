@@ -10,9 +10,10 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.gson.Gson
 import fr.isen.giraud.androiderestaurant.databinding.ActivityItemBinding
-import fr.isen.giraud.androiderestaurant.domain.Item
-import fr.isen.giraud.androiderestaurant.domain.CartLine
-import fr.isen.giraud.androiderestaurant.domain.Cart
+import fr.isen.giraud.androiderestaurant.model.Item
+import fr.isen.giraud.androiderestaurant.model.CartLine
+import fr.isen.giraud.androiderestaurant.model.Cart
+import fr.isen.giraud.androiderestaurant.view.ViewPagerAdapter
 import pl.polak.clicknumberpicker.ClickNumberPickerListener
 import java.io.File
 
@@ -25,8 +26,6 @@ class ItemActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item)
-
 
         binding = ActivityItemBinding.inflate(layoutInflater)
         setContentView(binding.root)

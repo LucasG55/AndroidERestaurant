@@ -13,8 +13,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import fr.isen.giraud.androiderestaurant.databinding.ActivityCategoryBinding
-import fr.isen.giraud.androiderestaurant.domain.APIData
-import fr.isen.giraud.androiderestaurant.domain.Item
+import fr.isen.giraud.androiderestaurant.model.APIData
+import fr.isen.giraud.androiderestaurant.model.Item
+import fr.isen.giraud.androiderestaurant.view.CustomAdapter
 import org.json.JSONObject
 import java.nio.charset.Charset
 
@@ -26,7 +27,6 @@ class CategoryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
 
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)

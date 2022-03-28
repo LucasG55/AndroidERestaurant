@@ -1,15 +1,15 @@
-package fr.isen.giraud.androiderestaurant
+package fr.isen.giraud.androiderestaurant.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import fr.isen.giraud.androiderestaurant.R
 import fr.isen.giraud.androiderestaurant.databinding.ItemCategoryBinding
-import fr.isen.giraud.androiderestaurant.domain.Item
+import fr.isen.giraud.androiderestaurant.model.Item
 
 internal class CustomAdapter(private var itemsList: List<Item>, private val onClickListener: OnClickListener) : RecyclerView.Adapter<CustomAdapter.MyViewHolder>() {
 

@@ -7,5 +7,10 @@
     <string name="itemName">ItemName</string>
     <string name="none" />
     <string name="platPrice">10 €</string>
+    <string name="textBle">Lancer le scan BLE</string>
+    <string name="stateButton">play</string>
+    <string name="MacAdress">00:00:00:00:00:00</string>
+    <string name="BleItemName">Device Unknown</string>
+    <string name="DeviceDistance">-90</string>
 
 </resources>

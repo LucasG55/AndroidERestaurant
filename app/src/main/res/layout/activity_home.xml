@@ -42,13 +42,23 @@
         />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="413dp"
         android:layout_height="434dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/androidrestaurant" />
+
+    <ImageView
+        android:id="@+id/buttonBLE"
+        android:layout_width="73dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonDesserts"
+        app:srcCompat="@drawable/blelogo" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,13 @@
-package fr.isen.giraud.androiderestaurant
+package fr.isen.giraud.androiderestaurant.view
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.squareup.picasso.Picasso
+import fr.isen.giraud.androiderestaurant.R
 
 class ViewPagerAdapter (private val mContext: Context, private  val itemList: Array<String>) : PagerAdapter() {
     private var layoutInflater: LayoutInflater? = null

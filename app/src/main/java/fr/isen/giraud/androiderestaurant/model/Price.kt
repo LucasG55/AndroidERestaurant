@@ -1,4 +1,4 @@
-package fr.isen.giraud.androiderestaurant.domain
+package fr.isen.giraud.androiderestaurant.model
 
 data class Price (
     val id : String,

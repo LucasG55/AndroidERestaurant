@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import fr.isen.giraud.androiderestaurant.databinding.ActivityCartBinding
-import fr.isen.giraud.androiderestaurant.domain.Cart
-import fr.isen.giraud.androiderestaurant.domain.CartLine
+import fr.isen.giraud.androiderestaurant.model.Cart
+import fr.isen.giraud.androiderestaurant.model.CartLine
+import fr.isen.giraud.androiderestaurant.view.CartAdapter
 import java.io.File
 
 
@@ -34,7 +35,7 @@ class CartActivity : AppCompatActivity() {
 
         //setup du recycler view
         val recyclerCart: RecyclerView = binding.recyclerCart
-        cartAdapter = CartAdapter(itemsList,CartAdapter.OnClickListener { item ->
+        cartAdapter = CartAdapter(itemsList, CartAdapter.OnClickListener { item ->
             onListCartClickDelete(item)
         })
         val layoutManager = LinearLayoutManager(applicationContext)
