@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.giraud.androiderestaurant.databinding.ItemBleBinding
+import fr.isen.giraud.androiderestaurant.model.Item
 
-internal class BLEAdapter(private var itemsList: MutableList<ScanResult>) : RecyclerView.Adapter<BLEAdapter.MyViewHolder>() {
+internal class BLEAdapter(private var itemsList: MutableList<ScanResult>, private val onClickListener: BLEAdapter.OnClickListener) : RecyclerView.Adapter<BLEAdapter.MyViewHolder>() {
     private lateinit var binding: ItemBleBinding
 
     internal inner class MyViewHolder(binding: ItemBleBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -39,5 +40,12 @@ internal class BLEAdapter(private var itemsList: MutableList<ScanResult>) : Recy
 
         holder.distance.text = item.rssi.toString()
         holder.macAdress.text = item.device.address
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(item)
+        }
+    }
+
+    class OnClickListener(val clickListener: (item : ScanResult) -> Unit) {
+        fun onClick(item: ScanResult) = clickListener(item)
     }
 }

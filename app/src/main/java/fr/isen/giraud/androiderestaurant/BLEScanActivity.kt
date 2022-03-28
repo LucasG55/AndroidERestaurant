@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -43,7 +44,8 @@ class BLEScanActivity : AppCompatActivity() {
 
         //setup du recycler view
         val recyclerBLE: RecyclerView = binding.listBle
-        bleAdapter = BLEAdapter(itemsList)
+        bleAdapter = BLEAdapter(itemsList, BLEAdapter.OnClickListener { item ->
+            onClickListItem(item) })
         val layoutManager = LinearLayoutManager(applicationContext)
         recyclerBLE.layoutManager = layoutManager
         recyclerBLE.adapter = bleAdapter
@@ -141,6 +143,10 @@ class BLEScanActivity : AppCompatActivity() {
         }
         itemsList.sortBy { kotlin.math.abs(it.rssi) }
         bleAdapter.notifyDataSetChanged()
+    }
+
+    fun onClickListItem (item: ScanResult) {
+        Toast.makeText(applicationContext, "${item.device.address}", Toast.LENGTH_SHORT).show()
     }
 
 }
