@@ -146,6 +146,10 @@ class BLEScanActivity : AppCompatActivity() {
     }
 
     fun onClickListItem (item: ScanResult) {
+
+        val intent = Intent(this, BLEDeviceActivity::class.java)
+        intent.putExtra("Device", item.device)
+        startActivity(intent)
         Toast.makeText(applicationContext, "${item.device.address}", Toast.LENGTH_SHORT).show()
     }
 
