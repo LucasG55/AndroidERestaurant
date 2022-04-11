@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DroidERestaurant</string>
+    <string name="app_name">LucasAnDroidERestaurant</string>
     <string name="DefaultCategoy">DefaultCategory</string>
     <string name="buttonEntrees">Entrées</string>
     <string name="buttonPlats">Plats</string>
